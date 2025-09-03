@@ -10,6 +10,13 @@ export default function Header() {
     <header className="site-header">
       <div className="container inner">
         <Link to="/" className="logo">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" className="logo-icon">
+            <circle cx="16" cy="16" r="16" fill="currentColor"/>
+            <path d="M8 24h16v2H8z" fill="#ffffff" opacity="0.9"/>
+            <path d="M16 6c-2 0-4 1-5 3s0 4 1 5c1-1 2-2 4-2s3 1 4 2c1-1 2-3 1-5s-3-3-5-3z" fill="#ffffff"/>
+            <path d="M16 14c-1 0-2 1-2 2v6c0 1 1 2 2 2s2-1 2-2v-6c0-1-1-2-2-2z" fill="#15803d"/>
+            <ellipse cx="16" cy="10" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+          </svg>
           Paradise Nursery
         </Link>
 
