@@ -1,11 +1,11 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { store } from './store'
-import Header from './components/Header'
-import Landing from './pages/Landing'
-import Products from './pages/Products'
-import Cart from './pages/Cart'
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import Header from "./components/Header";
+import Landing from "./pages/Landing";
+import Products from "./pages/Products";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </Provider>
-  )
+  );
 }
 
-export default App
+export default App;

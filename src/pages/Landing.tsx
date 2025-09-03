@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export default function Landing() {
   return (
-    <main style={{padding:24,display:'grid',placeItems:'center',minHeight:'60vh'}}>
-      <div style={{maxWidth:900,textAlign:'center'}}>
-        <h1 style={{fontSize:48,margin:8}}>Paradise Nursery</h1>
-        <p style={{fontSize:18,opacity:0.9}}>We grow and ship healthy houseplants ready to brighten your home.</p>
-        <p style={{marginTop:24}}>
-          <Link to="/products">
-            <button>Get Started</button>
-          </Link>
+    <main className="hero">
+      <div className="container hero-content">
+        <h1 className="hero-title">Paradise Nursery</h1>
+        <p className="hero-sub">
+          We grow and ship healthy houseplants ready to brighten your home.
         </p>
+        <Link to="/products">
+          <button className="btn btn-primary">Get Started</button>
+        </Link>
       </div>
     </main>
-  )
+  );
 }

@@ -1,46 +1,96 @@
-import { useSelector, useDispatch } from 'react-redux'
-import type { RootState } from '../store'
-import { increaseQty, decreaseQty, removeItem } from '../store/cartSlice'
-import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "../store";
+import { increaseQty, decreaseQty, removeItem } from "../store/cartSlice";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
-  const items = useSelector((s: RootState) => s.cart.items)
-  const dispatch = useDispatch()
-  const list = Object.values(items)
-  const totalItems = list.reduce((sum, it) => sum + it.qty, 0)
-  const totalCost = list.reduce((sum, it) => sum + it.qty * it.price, 0)
-
+  const items = useSelector((s: RootState) => s.cart.items);
+  const dispatch = useDispatch();
+  const list = Object.values(items);
+  const totalItems = list.reduce((sum, it) => sum + it.qty, 0);
+  const totalCost = list.reduce((sum, it) => sum + it.qty * it.price, 0);
   return (
-    <main style={{padding:24}}>
-      <h2>Shopping Cart</h2>
-      <div>Total items: {totalItems}</div>
-      <div>Total cost: ${totalCost.toFixed(2)}</div>
+    <main className="container" style={{ padding: "40px 0" }}>
+      <h2 className="products-heading">Shopping Cart</h2>
+      <div className="cart-grid">
+        <div>
+          <div>
+            {list.length === 0 && <p className="muted">Your cart is empty.</p>}
+            {list.map((it) => (
+              <div key={it.id} className="cart-item">
+                {it.thumbnail ? (
+                  <img
+                    src={it.thumbnail}
+                    alt={it.name}
+                    className="cart-thumb"
+                  />
+                ) : (
+                  <div className="cart-thumb" />
+                )}
+                <div style={{ flex: 1 }}>
+                  <div className="cart-name">{it.name}</div>
+                  <div className="muted">${it.price.toFixed(2)} each</div>
+                </div>
 
-      <div style={{marginTop:16}}>
-        {list.length === 0 && <p>Your cart is empty.</p>}
-        {list.map((it) => (
-          <div key={it.id} style={{display:'flex',gap:12,alignItems:'center',borderBottom:'1px solid #eee',padding:'8px 0'}}>
-            <div style={{width:80,height:60,background:'#f4f4f4'}} />
-            <div style={{flex:1}}>
-              <div style={{fontWeight:600}}>{it.name}</div>
-              <div>${it.price.toFixed(2)} each</div>
-            </div>
-            <div style={{display:'flex',gap:8,alignItems:'center'}}>
-              <button onClick={() => dispatch(decreaseQty(it.id))}>-</button>
-              <div>{it.qty}</div>
-              <button onClick={() => dispatch(increaseQty(it.id))}>+</button>
-            </div>
-            <div>
-              <button onClick={() => dispatch(removeItem(it.id))}>Delete</button>
-            </div>
+                <div className="qty-controls">
+                  <button
+                    onClick={() => dispatch(decreaseQty(it.id))}
+                    className="btn"
+                  >
+                    -
+                  </button>
+                  <div>{it.qty}</div>
+                  <button
+                    onClick={() => dispatch(increaseQty(it.id))}
+                    className="btn"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <div>
+                  <button
+                    onClick={() => dispatch(removeItem(it.id))}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div style={{marginTop:20,display:'flex',gap:12}}>
-        <button onClick={() => alert('Coming Soon')}>Checkout</button>
-        <Link to="/products"><button>Continue Shopping</button></Link>
+        <aside className="aside">
+          <h3>Order Summary</h3>
+          <div className="summary-row">
+            <span>Total items</span>
+            <span className="summary-total">{totalItems}</span>
+          </div>
+          <div className="summary-row">
+            <span>Subtotal</span>
+            <span className="summary-total">${totalCost.toFixed(2)}</span>
+          </div>
+          <div
+            style={{
+              marginTop: 32,
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+            }}
+          >
+            <button
+              onClick={() => alert("Coming Soon")}
+              className="btn btn-primary"
+            >
+              Checkout
+            </button>
+            <Link to="/products">
+              <button className="btn btn-secondary">Continue Shopping</button>
+            </Link>
+          </div>
+        </aside>
       </div>
     </main>
-  )
+  );
 }
